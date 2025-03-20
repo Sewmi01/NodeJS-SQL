@@ -62,3 +62,26 @@ export const buyer_signup = (req, res) => {
         });
     });
 };
+
+export const buyer_login = (req, res) => {
+    if (!connection) throw console.error("No SQL connection");
+
+    const { email, password } = req.body;
+
+    db.query(`SELECT email FROM registration WHERE email = '${email}' and password = '${password}'`, function (error, result, fields) {
+        if (error) throw error;
+        if (result.length > 0) {
+            res.send({
+                code: 200,
+                success: true,
+                result: result
+            })
+        } else {
+            res.send({
+                code: 404,
+                success: false
+            })
+        }
+    })
+
+}
