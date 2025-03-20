@@ -1,3 +1,4 @@
+import { buyer_login } from "./buyer.functions.js";
 import { connection, db } from "./db.functions.js"
 
 export const user_login = (req, res) => {
@@ -14,10 +15,7 @@ export const user_login = (req, res) => {
                 result: result
             })
         } else {
-            res.send({
-                code: 404,
-                success: false
-            })
+            buyer_login(req, res);
         }
     })
 
